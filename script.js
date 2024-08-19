@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const dino = document.getElementById('dino');
     const obstacle = document.getElementById('obstacle');
-    let isJumping = false;
+    let isJumping = true;
     let jumpCount = 0;
     let score = 0;
     let gameInterval;
