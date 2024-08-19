@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let jumpCount = 0;
     let score = 0;
     let gameInterval;
-    
-    const jumpHeight = 30;
-    const jumpSpeed = 10; 
-    const obstacleSpeed = 10;
+
+    const jumpHeight = 50; // Increased jump height
+    const jumpSpeed = 10;  // Increased speed of jump
+    const obstacleSpeed = 10; // Increased speed of obstacle movement
 
     function jump() {
         if (isJumping) return;
@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         dino.style.bottom = '50px';
                     } else {
                         jumpCount--;
-                        dino.style.bottom = `${50 + jumpCount * 2}px`;
+                        dino.style.bottom = `${50 + jumpCount}px`;
                     }
                 }, jumpSpeed);
             } else {
                 jumpCount++;
-                dino.style.bottom = `${50 + jumpCount * 2}px`;
+                dino.style.bottom = `${50 + jumpCount}px`;
             }
         }, jumpSpeed);
     }
@@ -45,33 +45,4 @@ document.addEventListener('DOMContentLoaded', () => {
         let obstaclePosition = window.innerWidth;
 
         const obstacleInterval = setInterval(() => {
-            if (obstaclePosition < -30) {
-                obstaclePosition = window.innerWidth;
-                score++;
-                updateScore();
-            } else {
-                obstaclePosition -= obstacleSpeed;
-            }
-            obstacle.style.left = `${obstaclePosition}px`;
-
-            if (obstaclePosition < 100 && obstaclePosition > 50 && parseInt(dino.style.bottom) < 100) {
-                clearInterval(obstacleInterval);
-                clearInterval(gameInterval);
-                alert(`Game Over! Your score: ${score}`);
-            }
-        }, 20);
-    }
-
-    function updateScore() {
-        document.getElementById('score').innerText = `Score: ${score}`;
-    }
-
-    function startGame() {
-        score = 0;
-        updateScore();
-        moveObstacle();
-        gameInterval = setInterval(moveObstacle, 20);
-    }
-
-    startGame();
-});
+            if (obstaclePosit
