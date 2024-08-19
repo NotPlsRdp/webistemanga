@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     let gameInterval;
 
-    const jumpHeight = 60; // Increased jump height
-    const jumpSpeed = 20;  // Increased speed of jump
-    const obstacleSpeed = 10; // Increased speed of obstacle movement
+    const jumpHeight = 100; // Increased jump height
+    const jumpSpeed = 80;  // Increased speed of jump
+    const obstacleSpeed = 50; // Increased speed of obstacle movement
 
     function jump() {
         if (isJumping) return;
