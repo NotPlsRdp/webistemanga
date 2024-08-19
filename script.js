@@ -1,36 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Array of manga page URLs
-    const mangaPages = [
-        'page1.jpg',
-        'page2.jpg',
-        'page3.jpg'
-        // Add more pages as needed
-    ];
+    const dino = document.getElementById('dino');
+    const obstacle = document.getElementById('obstacle');
+    let isJumping = false;
+    let jumpCount = 0;
 
-    let currentPage = 0;
-
-    const mangaImage = document.getElementById('manga-image');
-    const prevChapterBtn = document.getElementById('prev-chapter');
-    const nextChapterBtn = document.getElementById('next-chapter');
-
-    function updatePage() {
-        mangaImage.src = mangaPages[currentPage];
+    function jump() {
+        if (isJumping) return;
+        isJumping = true;
+        jumpCount = 0;
+        
+        const jumpInterval = setInterval(() => {
+            if (jumpCount >= 15) {
+                clearInterval(jumpInterval);
+                const fallInterval = setInterval(() => {
+                    if (jumpCount <= 0) {
+                        clearInterval(fallInterval);
+                        isJumping = false;
+                    }
+                    jumpCount--;
+                    dino.style.bottom = `${50 + jumpCount * 2}px`;
+                }, 20);
+            }
+            jumpCount++;
+            dino.style.bottom = `${50 + jumpCount * 2}px`;
+        }, 20);
     }
 
-    prevChapterBtn.addEventListener('click', () => {
-        if (currentPage > 0) {
-            currentPage--;
-            updatePage();
+    document.addEventListener('keydown', (e) => {
+        if (e.key === ' ') {
+            jump();
         }
     });
 
-    nextChapterBtn.addEventListener('click', () => {
-        if (currentPage < mangaPages.length - 1) {
-            currentPage++;
-            updatePage();
-        }
-    });
-
-    // Load the first page initially
-    updatePage();
+    function moveObstacle() {
+        let obstaclePosition = window.innerWidth;
+        const obstacleInterval = setInterval(() => {
+            if (obstaclePosition < 0) {
+                obstaclePosition = window.innerWidth;
+            }
+            obstaclePosition -= 5;
+            obstacle.style.left = `${obstaclePosition}px`;
+            
+            if (obstaclePosition < 100 && obstaclePosition > 50 && parseInt(dino.style.bottom) < 100) {
+                alert('Game Over!');
+                obstaclePosition = window.innerWidth;
+            }
+        }, 20);
+    }
+    
+    moveObstacle();
 });
