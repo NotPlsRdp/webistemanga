@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const dino = document.getElementById('dino');
     const obstacle = document.getElementById('obstacle');
-    let isJumping = true;
+    let isJumping = false;
     let jumpCount = 0;
     let score = 0;
     let gameInterval;
     
-    const jumpHeight = 30; // increased to maintain a higher jump
-    const jumpSpeed = 10;  // reduced from 20ms to 10ms for faster jump
-    const obstacleSpeed = 10; // increased from 5 to 10 for faster obstacle movement
+    const jumpHeight = 30;
+    const jumpSpeed = 10; 
+    const obstacleSpeed = 10;
 
     function jump() {
         if (isJumping) return;
@@ -54,13 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             obstacle.style.left = `${obstaclePosition}px`;
 
-            // Check for collision
             if (obstaclePosition < 100 && obstaclePosition > 50 && parseInt(dino.style.bottom) < 100) {
                 clearInterval(obstacleInterval);
                 clearInterval(gameInterval);
                 alert(`Game Over! Your score: ${score}`);
             }
-        }, 20); // Maintained the interval for consistency in the game loop
+        }, 20);
     }
 
     function updateScore() {
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         score = 0;
         updateScore();
         moveObstacle();
-        gameInterval = setInterval(moveObstacle, 20); // Maintained the interval for consistency in the game loop
+        gameInterval = setInterval(moveObstacle, 20);
     }
 
     startGame();
